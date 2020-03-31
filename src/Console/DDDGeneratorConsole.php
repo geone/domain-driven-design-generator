@@ -49,7 +49,15 @@ class DDDGeneratorCommand extends Command
     public function handle()
     {
         $domainName = $this->option('domain');
+        if (empty($domainName)) {
+            throw new Exception("--domain= is empty", 412);
+        }
+        
         $tableName = $this->option('table');
+        if (empty($tableName)) {
+            throw new Exception("--tableName= is empty", 412);
+        }
+        
         $folders = Config('dddLaravelGenerator.path');
         foreach ($folders as $k => $v) {
             if(!File::isDirectory($v)){
@@ -58,17 +66,19 @@ class DDDGeneratorCommand extends Command
             }
         }
     
-        $this->create('Test','controllerPath');
-        $this->create('Test','interface');
-        $this->create('Test','repository', 'users');
-        $this->create('Test','domainModel');
+        $this->create($domainName,'controllerPath');
+        $this->create($domainName,'interface');
+        $this->create($domainName,'repository', $tableName);
+        $this->create($domainName,'domainModel');
+        
+        // todo: fix here!!!
         $this->create('AbstractDomain','abstractDomain');
     }
     
     /**
      * @param string $className
      * @param string $type
-     * @param string|null $tableBame
+     * @param string|null $tableName
      */
     public function create(string $className, string $type, string $tableName=null) {
         $path = Config('dddLaravelGenerator.templates.'.$type);
