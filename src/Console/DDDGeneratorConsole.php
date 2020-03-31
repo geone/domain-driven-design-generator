@@ -50,12 +50,12 @@ class DDDGeneratorCommand extends Command
     {
         $domainName = $this->option('domain');
         if (empty($domainName)) {
-            throw new Exception("--domain= is empty", 412);
+            throw new \Exception("--domain= is empty", 412);
         }
         
         $tableName = $this->option('table');
         if (empty($tableName)) {
-            throw new Exception("--tableName= is empty", 412);
+            throw new \Exception("--tableName= is empty", 412);
         }
         
         $folders = Config('dddLaravelGenerator.path');
