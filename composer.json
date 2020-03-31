@@ -1,0 +1,24 @@
+{
+    "name": "geone/domain-driven-design-generator",
+    "description": "Allows to generate building blocks for domain driven design in laravel",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Geone",
+            "email": "geone85@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+	"autoload": {
+		"psr-4": {
+			"Geone\\dddLaravelGenerator\\": "src/"
+		}
+	},
+  "autoload-dev": {
+    "psr-4": {
+      "Geone\\dddLaravelGenerator\\": "src/"
+    }
+  }
+}
