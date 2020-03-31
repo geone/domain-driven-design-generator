@@ -15,11 +15,11 @@ return [
         'interface' => app_path().'/Domain/Model/Repository/Contract/',
     ],
     'templates' => [
-        'controllerPath' =>  __DIR__.'/../Templates/Controller.php',
-        'domainModel' =>  __DIR__.'/../Templates/DomainModel.php',
-        'abstractDomain' =>  __DIR__.'/../Templates/AbstractDomain.php',
-        'interface' =>  __DIR__.'/../Templates/Interface.php',
-        'repository' =>  __DIR__.'/../Templates/Repository.php'
+        'controllerPath' => __DIR__ . '/../Templates/Controller.php',
+        'domainModel' => __DIR__ . '/../Templates/DomainModel.php',
+        'abstractDomain' => __DIR__ . '/../Templates/AbstractDomain.php',
+        'interface' => __DIR__ . '/../Templates/Interface.php',
+        'repository' => __DIR__ . '/../Templates/Repository.php'
     ],
     'fileSuffix' => [
         'domain' => 'Domain.php',
