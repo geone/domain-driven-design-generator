@@ -24,7 +24,7 @@ class DDDGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'DDDGenerator:build
+    protected $signature = 'domain-driven-design:builder
                             {--d|domain= : The name of the Domain you would like to build, example: User, Invoice}
                             {--t|table= : The name of the Mysql Table you would like to query.}';
     
@@ -48,16 +48,17 @@ class DDDGeneratorCommand extends Command
      */
     public function handle()
     {
-        $domainName = $this->option('domain');
+        $domainName = !empty($this->option('domain')) ? $this->option('domain') : null;
         if (empty($domainName)) {
             throw new \Exception("--domain= is empty", 412);
         }
         
-        $tableName = $this->option('table');
+        $tableName = !empty($this->option('table')) ? $this->option('table') : null;
         if (empty($tableName)) {
             throw new \Exception("--tableName= is empty", 412);
         }
         
+        // create required directories.
         $folders = Config('dddLaravelGenerator.path');
         foreach ($folders as $k => $v) {
             if(!File::isDirectory($v)){
@@ -66,13 +67,17 @@ class DDDGeneratorCommand extends Command
             }
         }
     
+        // create files
         $this->create($domainName,'controllerPath');
         $this->create($domainName,'interface');
         $this->create($domainName,'repository', $tableName);
         $this->create($domainName,'domainModel');
-        
-        // todo: fix here!!!
-        $this->create('AbstractDomain','abstractDomain');
+    
+        // create abstractDomain is required
+        $abstractDomain = !empty($this->option('abstractDomain')) ? $this->option('abstractDomain') : null;
+        if (!empty($tableName)) {
+            $this->create('AbstractDomain','abstractDomain');
+        }
     }
     
     /**
