@@ -11,14 +11,9 @@
     ],
     "minimum-stability": "dev",
     "require": {},
-	"autoload": {
-		"psr-4": {
-			"Geone\\dddLaravelGenerator\\": "src/"
-		}
-	},
-  "autoload-dev": {
-    "psr-4": {
-      "Geone\\dddLaravelGenerator\\": "src/"
+    "autoload-dev": {
+      "psr-4": {
+        "Geone\\dddLaravelGenerator\\": "src/"
+      }
     }
-  }
 }
