@@ -11,27 +11,28 @@ class {{ClassName}}Model extends AbstractDomain
     /**
      * @param $project
      * @param array $search
+     * @param int $idUser
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function search($project, array $search)
+    public function search($project, array $search, int $idUser)
     {
-        $search = $this->container->make({{ClassName}}RepositoryInterface::class)->search($project, $search);
+        $search = $this->container->make({{ClassName}}RepositoryInterface::class)->search($project, $search, $idUser);
         if (empty($search)) {
             throw new \Exception("Could not found results to show", 404);
         }
         return $search;
     }
     
-	/**
-     * @param $project
+    /**
+     * @param string $project
      * @param int $id
-     * @return array
-     * @throws \Exception
+     * @param int $idUser
+     * @return mixed
      */
-    public function getById($project, int $id)
+    public function getById(string $project, int $id, int $idUser)
     {
-        return $this->container->make({{ClassName}}RepositoryInterface::class)->getById($project, $id);
+        return $this->container->make({{ClassName}}RepositoryInterface::class)->getById($project, $id, $idUser);
     }
 	
     /**
@@ -49,23 +50,24 @@ class {{ClassName}}Model extends AbstractDomain
      * @param $project
      * @param $id
      * @param array $params
+     * @param array $user
      * @return array
      * @throws \Exception
      */
-    public function update($project, $id, array $params)
+    public function update($project, $id, array $params, int $idUser)
     {
-        $this->getById($project, $id);
-        return $this->container->make({{ClassName}}RepositoryInterface::class)->update($project, $id, $params);
+        $this->getById($project, $id, $idUser);
+        return $this->container->make({{ClassName}}RepositoryInterface::class)->update($project, $id, $params, $idUser);
     }
-	
-	/**
+    
+    /**
      * @param $project
      * @param int $id
-     * @return array
-     * @throws \Exception
+     * @param int $idUser
+     * @return mixed
      */
-    public function delete($project, int $id) {
-        $data = $this->container->make({{ClassName}}RepositoryInterface::class)->delete($project, $id);
+    public function delete($project, int $id, int $idUser) {
+        $data = $this->container->make({{ClassName}}RepositoryInterface::class)->delete($project, $id, $idUser);
         return $data;
     }
 }

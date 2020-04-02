@@ -34,7 +34,8 @@ class {{ClassName}}Controller extends Controller
     {
         try {
             $params  = $request->toArray();
-            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->search($project, $params);
+            $user = $request->user;
+            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->search($project, $params, $user['id']);
             // generate cache
             $response = ['code' => 200, 'data' => ${{ClassNameCamelCase}}];
             return response()->json($response, 200);
@@ -45,16 +46,16 @@ class {{ClassName}}Controller extends Controller
     }
 
     /**
-     *
      * @param string $project
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws Exception
+     * @param $id
+     * @param Request $request
+     * @return mixed
      */
-    public function getById(string $project, $id)
+    public function getById(string $project, $id, Request $request)
     {
         try {
-            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->getById($project, $id);
+            $user = $request->user;
+            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->getById($project, $id, $user['id']);
             $response = ['code' => 200, 'data' => ${{ClassNameCamelCase}}];
             return response()->json($response, 200);
         } catch (Exception $e) {
@@ -72,7 +73,8 @@ class {{ClassName}}Controller extends Controller
     public function create(string $project, Request $request)
     {
         try {
-            $response = $this->{{ClassNameCamelCase}}Model->create($project, $request->all(), $request->headers->all());
+            $user = $request->user;
+            $response = $this->{{ClassNameCamelCase}}Model->create($project, $request->all());
             $response = ['code' => 200, 'data' => $response];
             return response()->json($response, 200);
         } catch (Exception $e) {
@@ -92,8 +94,8 @@ class {{ClassName}}Controller extends Controller
     {
         try {
             $params  = $request->toArray();
-            $headers = $request->headers->all();
-            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->update($project, $id, $params, $headers);
+            $user = $request->user;
+            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->update($project, $id, $params, $user['id']);
             // generate cache
             $response = ['code' => 200, 'data' => ${{ClassNameCamelCase}}];
             return response()->json($response, 200);
@@ -114,8 +116,8 @@ class {{ClassName}}Controller extends Controller
     {
         try {
             $params  = $request->toArray();
-            $headers = $request->headers->all();
-            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->delete($project, $id, $params, $headers);
+            $user = $request->user;
+            ${{ClassNameCamelCase}} = $this->{{ClassNameCamelCase}}Model->delete($project, $id, $params, $user['id']);
             // generate cache
             $response = ['code' => 200, 'data' => ${{ClassNameCamelCase}}];
             return response()->json($response, 200);

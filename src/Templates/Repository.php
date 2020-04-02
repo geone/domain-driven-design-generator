@@ -22,10 +22,10 @@ class {{ClassName}}Repository extends AbstractRepository implements {{ClassName}
     /**
      * @param string $connection
      * @param array $params
+     * @param int $idUser
      * @return array
-     * @throws \Exception
      */
-    public function search(string $connection, array $params): array 
+    public function search(string $connection, array $params): array
 	{
     
         $quantity = 15;
@@ -100,9 +100,10 @@ class {{ClassName}}Repository extends AbstractRepository implements {{ClassName}
     /**
      * @param string $connection
      * @param int $id
+     * @param int $idUser
      * @return array
      */
-    public function getById(string $connection, int $id): array 
+    public function getById(string $connection, int $id, int $idUser): array
 	{
         $data = DB::connection($connection)
           ->table($this->table)
@@ -123,12 +124,13 @@ class {{ClassName}}Repository extends AbstractRepository implements {{ClassName}
      * @param string $connection
      * @param int $id
      * @param array $params
+     * @param int $idUser
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function update(string $connection, int $id, array $params): array 
+    public function update(string $connection, int $id, int $idUser, array $params): array
 	{
-        $data = $this->getById($connection,$id);
+        $data = $this->getById($connection,$id, $idUser);
         if (empty($data)) {
             throw new \Exception("{{ClassName}} does not exist.", 404);
         }
@@ -141,13 +143,14 @@ class {{ClassName}}Repository extends AbstractRepository implements {{ClassName}
         }
         return $data;
     }
-	
-	/**
+    
+    /**
      * @param string $connection
      * @param int $id
+     * @param int $idUser
      * @return bool
      */
-    public function delete(string $connection, int $id): bool
+    public function delete(string $connection, int $id, int $idUser): bool
     {
         return DB::connection($connection)
             ->table($this->table)
