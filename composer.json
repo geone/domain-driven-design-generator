@@ -9,9 +9,9 @@
             "email": "geone85@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "master",
     "require": {},
-    "autoload-dev": {
+    "autoload": {
       "psr-4": {
         "Geone\\dddLaravelGenerator\\": "src/"
       }
